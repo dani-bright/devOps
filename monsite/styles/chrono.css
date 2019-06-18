@@ -1,0 +1,46 @@
+@font-face {
+  font-family: "Lili";
+  src: url('fonts/lili.ttf');
+}
+.chronometre{
+        margin: auto ;
+      float:center;
+        width: 300px;
+        text-align: center;
+        
+      }
+
+      .tim{
+        margin: auto;
+        width: 300px;
+        border: 1px solid rgba(0,0,0,0.5);
+        padding:5px 0;
+       color: #fff;
+       font-family: "lili";
+        text-align: center;
+        font-size: 1.5em;
+        margin-bottom: 10px;
+
+
+      }
+     
+       .chronometre button{
+        background: #3498db;
+        color: #fff;
+        width: 70px;
+        border-radius: 5px;
+        line-height: 1.5em;
+        border: none;
+        display:none;
+      }
+     .sig {
+  position: fixed;
+  bottom: 8px;
+  right: 8px;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 100;
+  font-family: sans-serif;
+  color: #FFF;
+  letter-spacing: 2px;
+}

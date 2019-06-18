@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  web:
+    image: nginx:1.15
+    ports:
+      - "3000:80"
+    volumes:
+      - ./monsite:/var/www/monsite
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+    links:
+      - php
+  php:
+    build:
+      context: ./php-Dockerfile
+    depends_on:
+      - db_mysql
+    links:
+      - db_mysql
+    volumes:
+      - ./monsite:/var/www/monsite
+      - ../phpunit:/var/www/html #src and tests shared to container
+      - ~/.composer/cache:/root/.composer/cache
+    environment:
+      TZ: Europe/Moscow
+      XDEBUG_CONFIG: "remote_host=192.168.0.83 remote_port=9005 remote_enable=On"
+      PHP_IDE_CONFIG: "serverName=phpunit"
+  db_mysql:
+    image: mysql:5.7.17
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./create.sql:/docker-entrypoint-initdb.d/create.sql
+    environment:
+      MYSQL_DATABASE: mabase
+      MYSQL_USER: user
+      MYSQL_PASSWORD: test
+      MYSQL_ROOT_PASSWORD: test
