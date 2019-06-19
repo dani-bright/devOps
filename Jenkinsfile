@@ -1,17 +1,10 @@
 node {
     stage("composer_install") {
+        // Run `composer update` as a shell script
         sh 'composer install'
     }
-
-    stage("php_lint") {
-        sh 'find . -name "*.php" -print0 | xargs -0 -n1 php -l'
-    }
-
     stage("phpunit") {
+        // Run PHPUnit
         sh 'vendor/bin/phpunit'
-    }
-
-    stage("codeception") {
-        sh 'vendor/bin/codecept run'
     }
 }
