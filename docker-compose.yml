@@ -5,12 +5,11 @@ services:
     build:
       context: .
     ports:
-      - '80:8080'
-      - '5000:5000'
+      - '8080:8080'
+      - '50000:50000'
     volumes:
-      - './jenkins_home/:var/jenkins_home'
       - '/var/run/docker.sock:/var/run/docker.sock'
-      - '/usr/local/bin/docker:/usr/bin/docker'
+      - '/usr/bin/docker:/usr/bin/docker'
   web:
     image: nginx:1.15
     ports:
@@ -24,7 +23,7 @@ services:
       - php
   php:
     build:
-      context: ./php-Dockerfile
+      context: .
     depends_on:
       - db_mysql
     links:
