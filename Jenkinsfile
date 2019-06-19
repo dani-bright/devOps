@@ -1,17 +1,13 @@
 node {
-    stage("composer_install") {
-        sh 'composer install'
-    }
+stage('Composer Install') {
+     sh 'composer install'
+ }
 
-    stage("php_lint") {
-        sh 'find . -name "*.php" -print0 | xargs -0 -n1 php -l'
-    }
+ stage("PHPLint") {
+     sh 'find app -name "*.php" -print0 | xargs -0 -n1 php -l'
+ }
 
-    stage("phpunit") {
-        sh 'vendor/bin/phpunit'
-    }
-
-    stage("codeception") {
-        sh 'vendor/bin/codecept run'
-    }
+ stage("PHPUnit") {
+     sh 'vendor/phpunit/phpunit/phpunit --bootstrap build/bootstrap.php --configuration phpunit-coverage.xml'
+ }
 }
